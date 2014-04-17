@@ -1,6 +1,8 @@
 <?php
 	session_start();
-	if( $_SESSION['id'] ) header("Location:welcome.php");
+  if( isset( $_SESSION['id']) )
+    if( $_SESSION['id'] )
+      header("Location:welcome.php");
 ?>
 
 <!DOCTYPE html>

@@ -1,6 +1,9 @@
 <?php
+  include"db.php";
 	session_start();
 	if( !$_SESSION['id'] ) header("Location:index.php");
+  $res = mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` = ".$_SESSION['id']." LIMIT 1");
+  $user = mysql_fetch_object($res);
 ?>
 
 <!DOCTYPE html>
