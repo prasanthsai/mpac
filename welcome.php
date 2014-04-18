@@ -12,7 +12,7 @@ if( isset($_GET['q']) ){
 <div class="row">
   <div class="small-8 large-centered columns">
     <h3> Hello <?=$user->first_name?> <?=$user->last_name?> </h3>
-    <h5> You are in the process of registration. Please fill following details to continue. </h5>
+    <h5> You are in the Process of Registration... Please Fill the following details to Continue. </h5>
 
 <br>
 <br>
@@ -81,8 +81,8 @@ else if( $user->gender != NULL ){
 
 <div class="row">
   <div class="small-8 large-centered columns">
-    <h3> Hello <?=$user->first_name?> <?=$user->last_name?> </h3>
-    <h5> You are in the process of registration. Please fill following details to continue. </h5>
+    <h3> Hello <?=$user->first_name?> <?=$user->last_name?>  !!</h3>
+    <h5> You are in the Process of Registration... Please Fill the following details to Continue. </h5>
 
 
     <div class="row">
@@ -111,7 +111,7 @@ else if( $user->gender != NULL ){
       <label>Date Of Birth
         <select name="date"  >
           <?php
-          for ( $i=1; $i<=31; $i++ ) echo "<option value='".$i."'>".$i."</option>";
+          for ( $i=01; $i<=31; $i++ ) echo "<option value='".$i."'>".$i."</option>";
           ?>
         </select>
       </label>
@@ -129,12 +129,12 @@ else if( $user->gender != NULL ){
       <label>&nbsp; 
         <select name="year"  >
           <?php
-          for ( $i=2014; $i>=1905; $i-- ) echo "<option value='".$i."'>".$i."</option>";
+          for ( $i=1970; $i<=2014; $i++ ) echo "<option value='".$i."'>".$i."</option>";
           ?>
         </select>
       </label>
     </div>
-  </div>
+  </div> <br>
   <div class="row">
     <div class="large-6 columns">
       <div class="row collapse">
@@ -153,7 +153,7 @@ else if( $user->gender != NULL ){
     </div>
     <div class="large-6 columns">
       <div class="row collapse">
-        <label>College Name</label>
+        <label>College/University Name</label>
         <div class="small-9 columns">
           <input type="text" name="college" placeholder="College Name" />
         </div>
@@ -166,7 +166,7 @@ else if( $user->gender != NULL ){
         </div>
       </div>
     </div>
-  </div>
+  </div><br>
   <div class="row">
     <div class="large-6 columns">
       <div class="row collapse">
@@ -202,7 +202,7 @@ else if( $user->gender != NULL ){
   <div class="row">
         <br>
     <div class="large-6 columns">
-        <h4><small style='color:#C40505;'  > <?php if( isset($error)) echo $error; ?>  </small> </h4>
+        <h4><small style='color:#C40505;'  > <?php if( isset($error)) echo $error; ?>  </small> </h>
     </div>
     <div class="large-6 columns">
         <input type="submit" name="submit" style="height:40px;line-height:8px;" class="button right"  />

@@ -32,13 +32,13 @@
 	<nav class="top-bar" data-topbar>
   		<ul class="title-area">
     		<li class="name">
-      		<h1><a href="#">Virtual Academy | Prototype</a></h1>
+      		<h1><a href="#">BuddysHome</a></h1>
     		</li>
     		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
   		</ul>
 
   		<section class="top-bar-section">
-    	<!-- Left Nav Section -->
+    	<!-- Left Nav Section 
     	<ul class="right">           
         	
             <li><a href="./index.php">Home</a></li>
@@ -46,7 +46,7 @@
             <li><a href="topstudents.php">Top Students</a></li>
             <li><a href="dashboard.php">Dash Board</a></li>
             <li class="has-form"><a href="logout.php" class="button">Sign Out</a></li>
-        </ul>        
+        </ul>  -->      
  		</section>
 	</nav>
 	<!--### Top Nav - End -->

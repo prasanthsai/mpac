@@ -12,8 +12,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MPAC-OSNs</title>
-	<link rel="shortcut icon" href="images/IITM_Color_Logo_30px.png" type="image/png">
+  <title>  Multiparty Access Control for OSNs   </title>
+	<link rel="shortcut icon" href="images/smiley1.jpeg" type="image/jpeg">
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
@@ -28,13 +28,13 @@
   <!-- body content begins -->
   	<!-- ### Sign In Modal - Begin -->
     <div id="signInModal" class="reveal-modal" data-reveal>
-  		<h3 class="text-center">Sign into Virtual Academy</h3><br>
+  		<h3 class="text-center"><italic>  Please Sign In  </italic></h3><br>
   	<form >
     	<div class="row">
         <div class="small-4 small-centered columns">
           <div class="row">
             <div class="small-12 columns">
-              <input type="text" name="username" id="l_email" placeholder="EMail">
+              <input type="text" name="username" id="l_email" placeholder="E-mail">
             </div>
           </div>
           <div class="row">
@@ -58,13 +58,13 @@
     
     <!-- ### Sign Up Modal - Begin -->
     <div id="signUpModal" class="reveal-modal" data-reveal>
-  		<h2 class="text-center">Sign Up with Virtual Academy</h2>
+  		<h2 class="text-center">Need Help ?</h2>
   	<form>
   	<div class="row">
     <div class="small-12 medium-9">
       <div class="row">
         <div class="small-3 medium-6 columns">
-          <label for="right-label" class="right inline">Username</label>
+          <h3> Please enter the correct details
         </div>
         <div class="small-9 medium-6 columns">
           <input type="text" id="right-label" placeholder="Username">
@@ -111,22 +111,40 @@
 	</div>
 	<!--### Sign Up Modal - End -->
     
-    	<!-- ### Contact Us Modal - Begin -->
-    <div id="contactUsModal" class="reveal-modal" data-reveal>
-  		<h2 class="text-center">Contact Us</h2>
-        <h3 class="text-center">Feel free to drop us a mail at: <br>
-        <a>contact@virtualacademy.com</a></h3>
-  	
+	<!-- ### Need Help Modal - Begin -->
+    <div id="help" class="reveal-modal" data-reveal>
+  		<h3 class="text-center"><italic>  You Need Help.. Right ??  </italic></h3><br>
+  	<form >
+    	<div class="row">
+        <div class="small-5 small-centered columns">
+          <div class="row">
+            <div class="small-12 columns">
+              <h6>Please enter valid details in order to proceed further !!<h6>
+            </div>
+          </div>
+		  <div class="row">
+            <div class="small-12 columns">
+              <h6>Fill all the details without leaving them blank !!<h6>
+            </div>
+          </div>
+          <div class="row">
+            <div class="small-12 columns">
+              <h6> Password Length must be atleast 4 characters !!</h6>
+            </div>
+          </div>
+        </div>
+  	  </div>
+	</form>
 
   		<a class="close-reveal-modal">&#215;</a>
 	</div>
-	<!--### Contact Us Modal - End -->
-    
+	<!--### Need Help Modal End -->
+    	    
     <!-- ### Top Nav - Begin -->
 	<nav class="top-bar" data-topbar>
   		<ul class="title-area">
     		<li class="name">
-      		<h1><a href="#">Virtual Academy | Prototype</a></h1>
+      		<h1><a href="#">BuddysHome</a></h1>
     		</li>
     		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
   		</ul>
@@ -153,27 +171,26 @@
         <!-- ### Middle-Body Div - Begin -->
   <div id="Middle-Body" class="small-12 columns" >
     <div class="row text-center">
-      <div class="small-12 columns">
-        <h2>A brief overview of the site</h2>
-        <h4 class="subheader">Choose whether you wish to be a teacher or a student</h4>
+      <div class="small-12 columns"><br>
+        <h3 style="font-size:1.8rem;"> Multiparty Access Control for Online Social Networks: Model and Mechanisms </h3><h5>G Prasanth, N Sudheer Kumar</h5><br><br>
+        <!-- <h4 class="subheader">Choose whether you wish to be a teacher or a student</h4> -->
       </div>
     </div>
     <div class="row text-center">            	
       <div class="small-6 columns ">
         <a href="#">
-          <img src="./img/faster-to-learn.svg">
-          <h4>For Teachers</h4>
-        </a>
-        <p>Teach from Home!
-                        <br> Take Lectures from home, choose the timing that suits you and create a classroom.
-                        Teach the students and award them a badge on successsful completion of the Course.</p>
+          <img src="./images/social1.jpg"/>
+                  </a>
+        <p>Connect with friends all over the world !! <br>
+
+                        <br> Online Social Networks are Inherently designed to make Social Connections with Friends,Colleagues, Family and even with the Strangers...</p>
       </div>
       <div class="small-6 columns ">
         <div class="row">            	
           <div class="small-3 columns"></div>
             <div class="small-9 columns">
           <br><br>
-            <h4 class="text-left"> Register </h4>
+            <h4 class="text-left"> Sign Up  </h4>
           <form class="" >
             <div class="row">
               <div class="small-8 columns">
@@ -210,9 +227,9 @@
             <div class="row">
               <div class="small-8 columns">
               <h4 class="text-left" id="form_error_msg" style="margin-top:-0.9rem;"></h4>
-<a href="#" id="registerform" class="button expand" style="height:40px; line-height:8px">Register</a>
-              <h4 class="text-left" style="margin-top:-1.5rem;"><small><a href="#"> Login</a> </small></h4>
-              <h4 class="text-right" style="margin-top:-2.5rem;"><small><a href="#"> Need Help?</a> </small></h4>
+<a href="#" id="registerform" class="button expand" style="height:40px; line-height:8px">Sign Up</a>
+              <h4 class="text-left" style="margin-top:-1.5rem;"><small><a href="#" data-reveal-id="signInModal"> Login</a> </small></h4>
+              <h4 class="text-right" style="margin-top:-2.5rem;"><small><a href="#" data-reveal-id="help"> Need Help?</a> </small></h4>
               </div>
             </div>
             <div class="row" style="margin-top:-5rem;" >
@@ -267,11 +284,8 @@
         <div class="small-12 columns" id="Footer-Body">
                 <div class="row">
                 	<div class="small-7 small-offset-1 columns">
-                    	<h4>Product by GreenTomatoes</h4>
+                    	<h4>BuddysHome @ AITS RAJAMPET</h4>
                 	</div>
-                    <div class="small-2 columns">
-                    	<a href="#" data-reveal-id="contactUsModal" class="button">Contact Us</a>
-                    </div>
                 </div>
         </div>
     	<!-- ### Footer-Body Div - End -->
