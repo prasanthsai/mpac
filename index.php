@@ -2,7 +2,7 @@
 	session_start();
   if( isset( $_SESSION['id']) )
     if( $_SESSION['id'] )
-      header("Location:welcome.php");
+      header("Location:home.php");
 ?>
 
 <!DOCTYPE html>
@@ -389,7 +389,7 @@
         .done(function( data ) {
           if ( data == '1' ){
               $("#registerform").html("Successfully Registered!");
-              window.location.href = "welcome.php";
+              window.location.href = "home.php";
           }
           else{
             $("#r_pwd").val("");
@@ -414,7 +414,7 @@
         .done(function( data ) {
           if ( data == '1' ){
               $("#signinform").html("Successfully Logged In!");
-              window.location.href = "welcome.php";
+              window.location.href = "home.php";
           }
           else{
             $("#l_pwd").val("");

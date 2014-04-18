@@ -5,6 +5,35 @@ $months = array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov
 
 if( isset($_GET['q']) ){
   if( $_GET['q']  == '1'){
+    if( isset($_POST['submit2']) ){
+      $allowedExts = array("gif", "jpeg", "jpg", "png");
+      $temp = explode(".", $_FILES["file"]["name"]);
+      $extension = end($temp);
+      if ((($_FILES["file"]["type"] == "image/gif")
+          || ($_FILES["file"]["type"] == "image/jpeg")
+          || ($_FILES["file"]["type"] == "image/jpg")
+          || ($_FILES["file"]["type"] == "image/pjpeg")
+          || ($_FILES["file"]["type"] == "image/x-png")
+          || ($_FILES["file"]["type"] == "image/png"))
+          && ($_FILES["file"]["size"] < 20000000)
+          && in_array($extension, $allowedExts)){
+        if ($_FILES["file"]["error"] > 0){
+          echo "Return Code: " . $_FILES["file"]["error"] . "<br>";
+        }
+        else{
+            $fnam = $user->u_id.md5(time()).".".$extension;
+            if ( move_uploaded_file($_FILES["file"]["tmp_name"],"images/".$fnam) )
+              if( mysql_query("UPDATE `mpac`.`users` SET `display_pic` = '".$fnam."' WHERE `u_id` = '".$_SESSION['id']."' LIMIT 1") )
+                header("Location:welcome.php?q=1");
+              else
+                $error2 =  "Invalid file, Please try again!";
+                
+        }
+      }
+      else{
+        $error2 =  "Invalid file, Please try again!";
+      }
+    }
 ?>
 
 <br><br>
@@ -22,10 +51,10 @@ if( isset($_GET['q']) ){
       <div class="small-6 large-centered columns text-center">
         <h4> Please Upload your profile picture </h4>
         <img class="" src="images/<?=$user->display_pic?>" style="height:200px;width:180px;">
-          <form action="upload_file.php" method="POST">
+          <form action="" method="POST" enctype="multipart/form-data" >
             <div class="row">
               <div class="small-8 columns">
-                <input type="file"  name="upfile" />
+                <input type="file"  name="file" id="file" />
               </div>
               <div class="small-4 columns">
                 <input type="submit"  name="submit2" value="Upload" />
@@ -35,7 +64,14 @@ if( isset($_GET['q']) ){
       </div>
     </div>
     <div class="row">
-      <a href="#">
+      <div class="small-8 large-centered columns text-center">
+        <div class="small-6 columns ">
+        <h4><small style='color:#C40505;'  > <?php if( isset($error2)) echo $error2; ?>  </small> </h4>
+        </div>
+        <div class="small-6 columns text-right">
+          <a href="home.php" class="button " style="height:40px;line-height:8px;" > Proceed to home</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>
@@ -69,7 +105,7 @@ if( isset( $_POST['submit'] ) ){
 }
 
 if ( $user->gender != NULL and $user->display_pic != "default.jpg" ){
-  header("Location:home.php");
+    header("Location:home.php");
 }
 else if( $user->gender != NULL ){
   header("Location:welcome.php?q=1");
