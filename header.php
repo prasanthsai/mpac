@@ -14,16 +14,13 @@
         
             	<li></li>
 		<li class="heading">Manage Account</li>  				
-  		<li><a href="elections"><i class="fa fa-list-ul"></i> | News feed</a></li>  			
+  		<li><a href="home.php"><i class="fa fa-list-ul"></i> | News feed</a></li>  			
   		<li><a href="find_friends.php"><i class="fa fa-list-ul"></i> | Find friends</a></li>  			
-  		<li><a href="http://students.iitm.ac.in/"><i class="fa fa-windows"></i> | View friend requests</a></li>
-  		<li><a href="#"><i class="fa fa-envelope"></i> | Share photo</a></li>
-  		<li><a href="#/student_search"><i class="fa fa-search"></i> | Post photo</a></li>
-		<li><a href="http://students.iitm.ac.in/swiki/"><i class="fa fa-comments"></i> | Apps n Games</a></li>  				
-  		<br>
-  				<li class="heading">Mess Operations</li>  				
-  				<li><a href="#/mess_registration"><i class="fa fa-cutlery"></i> | Mess Registration</a></li>
-  				<li><a href="#/mess_rating"><i class="fa fa-star-half-o"></i> | Mess Rating</a></li>
+  		<li><a href="view_friends.php"><i class="fa fa-list-ul"></i> | View friends</a></li>  			
+  		<li><a href="view_requests.php"><i class="fa fa-windows"></i> | View requests</a></li>
+  		<li><a href="uploadphoto.php"><i class="fa fa-envelope"></i> | Share photo</a></li>
+  		<li><a href="uploadphoto.php?friend=1"><i class="fa fa-search"></i> | Post photo</a></li>
+		<li><a href="appsngames.php"><i class="fa fa-comments"></i> | Apps n Games</a></li>  				
 			</ul>
     
     	

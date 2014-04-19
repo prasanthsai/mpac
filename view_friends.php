@@ -1,5 +1,5 @@
 <?php
-$title = "Find friends";
+$title = "My friends";
 include "header.php";
 
 function sendreq( $id ){
@@ -90,9 +90,26 @@ function reqbutton( $row ){
 
 <?php
 
-$res7 = mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` != '".$_SESSION['id']."' ORDER BY `first_name` ");
+$res7 = mysql_query("SELECT u.u_id, u.display_pic,u.first_name,u.last_name FROM `mpac`.`relationships` AS r LEFT JOIN `mpac`.`users` AS u ON r.u_acceptor = u.u_id WHERE r.u_requester = '".$_SESSION['id']."' AND r.approval = 1 ");
 while( $row = mysql_fetch_object($res7) ){
-  if( mysql_num_rows( mysql_query("SELECT * FROM `mpac`.`relationships` WHERE ( `u_requester` = '".$row->u_id."' AND `u_acceptor` = '".$_SESSION['id']."' ) OR (`u_requester` = '".$_SESSION['id']."' AND `u_acceptor` = '".$row->u_id."' AND `approval` = '1' ) ") ) ) continue;
+?>
+  <div class="small-12 columns ">
+  <div class="small-2 columns">
+  <a style="float:right" class="th"><img style="max-height:80px;" src="images/<?=$row->display_pic?>"></a> 
+  </div>
+  <div class="small-10 columns">
+    <h4><a href="userprofile.php?u=<?=$row->u_id?>" ><?php echo $row->first_name." ".$row->last_name; ?></a></h4>
+      <div id="fdiv<?=$row->u_id?>">
+        <?=reqbutton($row)?>
+      </div>
+  </div>
+</div>
+
+<?php
+}
+
+$res7 = mysql_query("SELECT u.u_id, u.display_pic,u.first_name,u.last_name FROM `mpac`.`relationships` AS r LEFT JOIN `mpac`.`users` AS u ON r.u_requester = u.u_id WHERE r.u_acceptor = '".$_SESSION['id']."' AND r.approval = 1 ");
+while( $row = mysql_fetch_object($res7) ){
 ?>
   <div class="small-12 columns ">
   <div class="small-2 columns">

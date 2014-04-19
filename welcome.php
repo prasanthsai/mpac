@@ -180,9 +180,9 @@ else if( $user->gender != NULL ){
           </div>
           <div class="small-3 columns">
             <select name="schoolo">
-              <option value="0"> Public </option>
-              <option value="1"> Friends </option>
-              <option value="2"> Only Me </option>
+              <option value="1"> Public </option>
+              <option value="2"> Friends </option>
+              <option value="3"> Only Me </option>
             </select>
           </div>
       </div>
@@ -195,9 +195,9 @@ else if( $user->gender != NULL ){
         </div>
         <div class="small-3 columns">
           <select name="collegeo">
-            <option value="0"> Public </option>
-            <option value="1"> Friends </option>
-            <option value="2"> Only Me </option>
+              <option value="1"> Public </option>
+              <option value="2"> Friends </option>
+              <option value="3"> Only Me </option>
           </select>
         </div>
       </div>
@@ -212,9 +212,9 @@ else if( $user->gender != NULL ){
         </div>
         <div class="small-3 columns">
           <select name="workso">
-            <option value="0"> Public </option>
-            <option value="1"> Friends </option>
-            <option value="2"> Only Me </option>
+              <option value="1"> Public </option>
+              <option value="2"> Friends </option>
+              <option value="3"> Only Me </option>
           </select>
         </div>
       </div>
@@ -227,9 +227,9 @@ else if( $user->gender != NULL ){
         </div>
         <div class="small-3 columns">
           <select name="locationo">
-            <option value="0"> Public </option>
-            <option value="1"> Friends </option>
-            <option value="2"> Only Me </option>
+              <option value="1"> Public </option>
+              <option value="2"> Friends </option>
+              <option value="3"> Only Me </option>
           </select>
         </div>
       </div>

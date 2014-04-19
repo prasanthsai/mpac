@@ -1,5 +1,5 @@
 <?php
-$title = "Find friends";
+$title = "View Requests";
 include "header.php";
 
 function sendreq( $id ){
@@ -87,12 +87,12 @@ function reqbutton( $row ){
 
   </script>
 
+<h4>Friend requests:   </h4>
 
 <?php
-
-$res7 = mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` != '".$_SESSION['id']."' ORDER BY `first_name` ");
+$query = "SELECT `u_id`,`first_name`,`last_name`,`display_pic` from `mpac`.`users` WHERE (`u_id` IN (SELECT `u_requester` FROM `mpac`.`relationships` WHERE `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '0') OR `u_id` IN (SELECT `u_acceptor` FROM `mpac`.`relationships` WHERE `u_requester` = '".$_SESSION['id']."' AND `approval` = '0') ) ";
+$res7 = mysql_query($query);
 while( $row = mysql_fetch_object($res7) ){
-  if( mysql_num_rows( mysql_query("SELECT * FROM `mpac`.`relationships` WHERE ( `u_requester` = '".$row->u_id."' AND `u_acceptor` = '".$_SESSION['id']."' ) OR (`u_requester` = '".$_SESSION['id']."' AND `u_acceptor` = '".$row->u_id."' AND `approval` = '1' ) ") ) ) continue;
 ?>
   <div class="small-12 columns ">
   <div class="small-2 columns">
@@ -108,5 +108,38 @@ while( $row = mysql_fetch_object($res7) ){
 
 <?php
 }
+?>
+<h4>Other requests:   </h4>
+
+<?php
+$query = "SELECT u.u_id,u.first_name,u.last_name,a.a_id,a.a_link from `mpac`.`attachments` AS a LEFT JOIN `mpac`.`users` AS u ON a.a_owner = u.u_id WHERE a.a_wall = '".$_SESSION['id']."' AND a.a_wall != a.a_owner AND a.publish = 0 ORDER BY a.updated_at ";
+$res7 = mysql_query($query) or die(mysql_error());
+while( $row = mysql_fetch_object($res7) ){
+?>
+  <div class="small-12 columns ">
+    <div class="row">
+      <div class="small-10 columns">
+      <h5> <?=$row->first_name?> Wants to post this picture on you timeline. </h5>
+      </div>
+    </div>
+    <div class="row">
+      <div class="small-10 columns">
+        <a style="float:left" class="th"><img style="max-height:250px;" src="images/<?=$row->a_link?>"></a> 
+      </div>
+    </div><br>
+    <div class="row">
+      <div class="small-10 columns">
+      <a href="approvephoto.php?q=<?=$row->a_id?>" style="height:40px;line-height:8px" class="button"  >Approve </a> &nbsp;| &nbsp; 
+        <a href="approvephoto.php?q=<?=$row->a_id?>&d=1" style="height:40px;line-height:8px" class="button"> Decline</a> 
+      </div>
+    </div>
+  </div>
+<?php
+}
 include "footer.php";
 ?>
+
+<br>
+<br>
+<br>
+<br>

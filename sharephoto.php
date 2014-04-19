@@ -1,13 +1,10 @@
 <?php
-$title = "custom";
+$title = "Share a photo on your timeline";
 include "header.php";
 
-if( $user->gender == NULL or $user->display_pic == "default.jpg" ){
-  if( $user->gender == NULL )  header("Location:welcome.php");
-  else header("Location:welcome.php?q=1");
-}
-?>
+$row = mysql_fetch_object( mysql_query("SELECT * FROM `mpac`.`attachments` WHERE `a_id` = ".$_GET['q']));
 
+?>
 
 
 	<style type="text/css">
@@ -66,6 +63,24 @@ var cleanColdFusionJSONResponse = function( apiAction, response ){
 		
 		// When the DOM is ready, initialize the scripts.
 		jQuery(function( $ ){
+        $("#submitall").click(function () {
+          var shareo = $("#demo-input-facebook-theme-share").val();
+          var tago = $("#demo-input-facebook-theme-tag").val();
+          var commento = $("#demo-input-facebook-theme-comment").val();
+          var share = $("#sharestatus").val();
+          var tag = $("#tagstatus").val();
+          var comment = $("#commentstatus").val();
+          window.location.href= "publish.php?id=<?=$row->a_id?>&so="+shareo+"&to="+tago+"&co="+commento+"&s="+share+"&t="+tag+"&c="+comment ;
+        });
+        $("#demo-input-facebook-theme-share").tokenInput("friends_autocomplete.php", {
+            theme: "facebook"
+        });
+        $("#demo-input-facebook-theme-tag").tokenInput("friends_autocomplete.php", {
+            theme: "facebook"
+        });
+        $("#demo-input-facebook-theme-comment").tokenInput("friends_autocomplete.php", {
+            theme: "facebook"
+        });
 			
 			// Set up the photo tagger.
 			$( "div.photo-container" ).photoTagger({
@@ -157,118 +172,113 @@ var cleanColdFusionJSONResponse = function( apiAction, response ){
 		
 		});
 		
-    function showCommentBox ( id){
-        $("#commentbox"+id).attr('class', 'show');
-    }
-    function publishComment ( id){
-          var comnmess = $("#mcomn"+id).val();
-          $.post( "post_comment.php", { comment: comnmess, id: id })
-            .done(function( data ) {
-                $("#allcomments"+id).html(data);
-                $("#mcomn"+id).val("");
-          });
-    }
 	</script>
+</head>
+<body>
 
-
-
-
-
-
-<?php
-
-function getName($id){
-  $r =  mysql_fetch_object(mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` = ".$id));
-  return $r->first_name. " ". $r->last_name; 
-}
-
-$query = "SELECT * FROM `mpac`.`attachments` WHERE ( `a_owner` = '".$_SESSION['id']."' or `a_wall` = '".$_SESSION['id']."' or `shareo` LIKE '%".$_SESSION['id']."%' or (`share` = 2 AND (`a_owner` IN (SELECT `u_requester` FROM `mpac`.`relationships` WHERE `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '1') OR `a_owner` IN (SELECT `u_acceptor` FROM `mpac`.`relationships` WHERE `u_requester` = '".$_SESSION['id']."' AND `approval` = '1')))) AND `publish` = 1 ORDER BY `updated_at`";
-$res = mysql_query($query) or die( mysql_error() );
-while ( $rs = mysql_fetch_object($res) ){
-  $us = mysql_fetch_object(mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` LIKE '".$rs->a_owner."'"));
-  if( $_SESSION['id'] == $us->u_id ){
-    $name = "You";
-    $comment = true;
-    $share = false;
-    $tag = true;
-  }
-  else{
-    $name = $us->first_name. "  ". $us->last_name;
-    if (strpos( $rs->tago, ','.$_SESSION['id'].',') !== false or $rs->tag == '2' ) $tag = true; else $tag = false;
-    if (strpos( $rs->shareo, ','.$_SESSION['id'].',') !== false or $rs->share == '2' ) $share = true; else $share = false;
-    if (strpos( $rs->commento, ','.$_SESSION['id'].',') !== false or $rs->comment == '2' ) $comment = true; else $comment = false;
-  }
-  if( $rs->a_owner == $rs->a_wall ){
-    $imghead = $name." Shared a photo";
-  }
-  else {
-    $imghead = getName($rs->a_owner)." Posted a photo on ".getName($rs->a_wall)."'s timeline";
-  }
-?>
-
-<div class="row">
-  <div class="small-8 columns">
-  <h4><?=$imghead ?></h4>
-<?php if( $tag == true ) { ?>
-	  <div class="photo-column">
-	  	<div class="photo-container">
-<?php }?>
-		  	<img 
-          id="<?=$rs->a_id?>" 
-          src="images/<?=$rs->a_link?>" 
-				  style="height:280px;"
+	
+	<div class="photo-column">
+	
+		<div class="photo-container">
+			<img 
+        id="<?=$row->a_id?>" 
+        src="images/<?=$row->a_link?>" 
+				style="height:350px;"
 				/>
-<?php if( $tag == true ) { ?>
-		  </div>
-	  </div>
-<?php }?>
-  </div>
-</div>
-
+		</div>
+		
+		<!-- These will toggle the tag ceation. -->
+		<a href="#" class="enable-create button" id="encreate" style="height:40px;line-height:8px">Enable Create Tag</a> 
+		&nbsp;|&nbsp;
+		<a href="#" class="enable-create button" id="endelete" style="height:40px;line-height:8px">Enable Delete Tag</a> 
+		
+		<br />
+		<br />
+		
+	
+	</div>
+	
 <div class="row">
-  <div class="small-8 columns">
-<?php if( $share == true ) { ?>
-<a href="uploadphoto.php?share=<?=$rs->a_id?>" class="" style="height:40px;line-height:8px;" > Share This Photo </a> 
-<?php }?>
-<?php if( $comment == true ) { ?>
-&nbsp;<a href="#" id="commentbt<?=$rs->a_id?>" onclick="showCommentBox(<?=$rs->a_id?>)" class="" style="height:40px;line-height:8px;" > Comment </a> 
-<?php }?>
-		  </div>
-	  </div>
-<br>
-<div id="allcomments<?=$rs->a_id?>">
-<?php
-$a_id = $rs->a_id;
-include "post_comment.php";
-?>
-</div>
-<div class="hide" id="commentbox<?=$rs->a_id?>">
-<div class="row">
+  <div class="large-12 columns">
     <div class="large-6 columns">
-      <div class="row collapse">
-        <div class="small-10 columns">
-          <input type="text" id="mcomn<?=$rs->a_id?>" placeholder="Write your comment">
-        </div>
-        <div class="small-2 columns">
-        <a href="#" id="fcomn<?=$rs->a_id?>" onclick="publishComment(<?=$rs->a_id?>)" class="button postfix">Go</a>
-        </div>
+      <label>Share With :
+        <select id="sharestatus"  >
+          <option value="2">All Friends</option>
+          <option value="4">Specific Friends</option>
+          <option value="3">Only Me</option>
+        </select>
+      </label>
+    </div>
+    <div id="sharestatustext" class="hide">
+      <div class="large-6 columns">
+        <label>Specify Friends:
+        <input type="text" id="demo-input-facebook-theme-share" name="blah2" />
+        </label>
       </div>
     </div>
-</div>
-</div>
+  </div> 
+</div> 
+<div class="row">
+  <div class="large-12 columns">
+    <div class="large-6 columns">
+      <label>Who can see Tags :
+        <select id="tagstatus"  >
+          <option value="2">All Friends</option>
+          <option value="4">Specific Friends</option>
+          <option value="3">Only Me</option>
+        </select>
+      </label>
+    </div>
+    <div id="tagstatustext" class="hide">
+      <div class="large-6 columns">
+        <label>Specify Friends:
+        <input type="text" id="demo-input-facebook-theme-tag" name="blah2" />
+        </label>
+      </div>
+    </div>
+  </div> 
+</div> 
+<div class="row">
+  <div class="large-12 columns">
+    <div class="large-6 columns">
+      <label>Who can comment :
+        <select id="commentstatus"  >
+          <option value="2">All Friends</option>
+          <option value="4">Specific Friends</option>
+          <option value="3">Only Me</option>
+        </select>
+      </label>
+    </div>
+    <div id="commentstatustext" class="hide">
+      <div class="large-6 columns">
+        <label>Specify Friends:
+        <input type="text" id="demo-input-facebook-theme-comment" name="blah2" />
+        </label>
+      </div>
+    </div>
+  </div> 
+</div> 
+<div class="row">
+  </div>
+
+    <div>
+        <input class="button" id="submitall"  style="height:40px;line-height:8px;" value="Submit" />
+    </div>
+
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
 
 
-
-
-
-
-
-
-
-<br>
 <?php
-}
-
 
 include "footer.php";
 ?>

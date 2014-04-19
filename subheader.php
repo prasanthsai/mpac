@@ -38,15 +38,15 @@
   		</ul>
 
   		<section class="top-bar-section">
-    	<!-- Left Nav Section 
+    	Left Nav Section 
     	<ul class="right">           
         	
-            <li><a href="./index.php">Home</a></li>
+<!--            <li><a href="./index.php">Home</a></li>
             <li><a href="courses.php">Courses</a></li>
             <li><a href="topstudents.php">Top Students</a></li>
             <li><a href="dashboard.php">Dash Board</a></li>
-            <li class="has-form"><a href="logout.php" class="button">Sign Out</a></li>
-        </ul>  -->      
+-->            <li class="has-form"><a href="logout.php" class="button">Sign Out</a></li>
+        </ul>        
  		</section>
 	</nav>
 	<!--### Top Nav - End -->
