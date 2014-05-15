@@ -20,9 +20,6 @@
   <link rel="stylesheet" href="css/foundation.css">
 
   <!-- If you are using the gem version, you need this only -->
-  <link rel="stylesheet" href="css/app.css">
-
-  <script src="js/vendor/modernizr.js"></script>
 
 </head>
 <body >
