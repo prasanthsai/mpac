@@ -182,7 +182,7 @@ function getName($id){
   return $r->first_name. " ". $r->last_name; 
 }
 
-$query = "SELECT * FROM `mpac`.`attachments` WHERE ( `a_owner` = '".$_SESSION['id']."' or `a_wall` = '".$_SESSION['id']."' or `shareo` LIKE '%".$_SESSION['id']."%' or (`share` = 2 AND (`a_owner` IN (SELECT `u_requester` FROM `mpac`.`relationships` WHERE `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '1') OR `a_owner` IN (SELECT `u_acceptor` FROM `mpac`.`relationships` WHERE `u_requester` = '".$_SESSION['id']."' AND `approval` = '1')))) AND `publish` = 1 ORDER BY `updated_at`";
+$query = "SELECT * FROM `mpac`.`attachments` WHERE ( `a_owner` = '".$_SESSION['id']."' or `a_wall` = '".$_SESSION['id']."' or `shareo` LIKE '%".$_SESSION['id']."%' or (`share` = 2 AND (`a_owner` IN (SELECT `u_requester` FROM `mpac`.`relationships` WHERE `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '1') OR `a_owner` IN (SELECT `u_acceptor` FROM `mpac`.`relationships` WHERE `u_requester` = '".$_SESSION['id']."' AND `approval` = '1')))) AND `publish` = 1 ORDER BY `updated_at` DESC";
 $res = mysql_query($query) or die( mysql_error() );
 while ( $rs = mysql_fetch_object($res) ){
   $us = mysql_fetch_object(mysql_query("SELECT * FROM `mpac`.`users` WHERE `u_id` LIKE '".$rs->a_owner."'"));

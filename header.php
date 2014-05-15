@@ -8,19 +8,19 @@
         <div class="">
         <div class="leftColumn">
         <br>
-        <img src="images/<?=$user->display_pic?>" style="height:180px;width:160px;" > 
+        <a href="welcome.php?q=1&n=2"> <img src="images/<?=$user->display_pic?>" style="height:180px;width:160px;" > </a> 
             	
         	<ul class="side-nav">
         
             	<li></li>
 		<li class="heading">Manage Account</li>  				
   		<li><a href="home.php"><i class="fa fa-list-ul"></i> | News feed</a></li>  			
-  		<li><a href="find_friends.php"><i class="fa fa-list-ul"></i> | Find friends</a></li>  			
-  		<li><a href="view_friends.php"><i class="fa fa-list-ul"></i> | View friends</a></li>  			
+  		<li><a href="find_friends.php"><i class="fa fa-search"></i> | Find friends</a></li>  			
+  		<li><a href="view_friends.php"><i class="fa fa-users"></i> | View friends</a></li>  			
   		<li><a href="view_requests.php"><i class="fa fa-windows"></i> | View requests</a></li>
-  		<li><a href="uploadphoto.php"><i class="fa fa-envelope"></i> | Share photo</a></li>
-  		<li><a href="uploadphoto.php?friend=1"><i class="fa fa-search"></i> | Post photo</a></li>
-		<li><a href="appsngames.php"><i class="fa fa-comments"></i> | Apps n Games</a></li>  				
+  		<li><a href="uploadphoto.php"><i class="fa fa-photo"></i> | Share photo</a></li>
+  		<li><a href="uploadphoto.php?friend=1"><i class="fa fa-upload"></i> | Post photo</a></li>
+		<li><a href="appsngames.php"><i class="fa fa-th"></i> | Apps n Games</a></li>  				
 			</ul>
     
     	

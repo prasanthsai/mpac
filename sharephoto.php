@@ -1,5 +1,6 @@
 <?php
-$title = "Share a photo on your timeline";
+
+$title = "Post a photo";
 include "header.php";
 
 $row = mysql_fetch_object( mysql_query("SELECT * FROM `mpac`.`attachments` WHERE `a_id` = ".$_GET['q']));

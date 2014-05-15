@@ -1,6 +1,12 @@
 <?php
-$title = "View Requests";
-include "header.php";
+
+  include"db.php";
+  $xyz_query = "SELECT * FROM `mpac`.`users` WHERE `u_id` = '".$_GET['u']."'";
+  $req_det = mysql_fetch_object(mysql_query($xyz_query));
+
+
+  $title = $req_det->first_name." ". $req_det->last_name ."'s Profile";
+  include "header.php";
 
 function sendreq( $id ){
   return "<a href='#' onclick=\"sendrequest('".$id."')\" class='button' id='freq".$id."'  style='height:20px;line-height:0px' >  Send friend request </a>";
@@ -87,59 +93,153 @@ function reqbutton( $row ){
 
   </script>
 
-<h4>Friend requests:   </h4>
 
 <?php
-$query = "SELECT `u_id`,`first_name`,`last_name`,`display_pic` from `mpac`.`users` WHERE (`u_id` IN (SELECT `u_requester` FROM `mpac`.`relationships` WHERE `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '0') OR `u_id` IN (SELECT `u_acceptor` FROM `mpac`.`relationships` WHERE `u_requester` = '".$_SESSION['id']."' AND `approval` = '0') ) ";
-$res7 = mysql_query($query);
-while( $row = mysql_fetch_object($res7) ){
+
+
+if( mysql_num_rows( mysql_query("SELECT * FROM `mpac`.`relationships` WHERE ( `u_requester` = '".$req_det->u_id."' AND `u_acceptor` = '".$_SESSION['id']."' AND `approval` = '1' ) OR (`u_requester` = '".$_SESSION['id']."' AND `u_acceptor` = '".$req_det->u_id."' AND `approval` = '1' ) ") ) ) 
+  $pre_f = 1;
+else
+  $pre_f = 0;
+if ( $req_det->u_id != $_SESSION['id'] ){
 ?>
+
   <div class="small-12 columns ">
   <div class="small-2 columns">
-  <a style="float:right" class="th"><img style="max-height:80px;" src="images/<?=$row->display_pic?>"></a> 
+  <a style="float:right" class="th"><img style="max-height:80px;" src="images/<?=$req_det->display_pic?>"></a> 
   </div>
   <div class="small-10 columns">
-    <h4><a href="userprofile.php?u=<?=$row->u_id?>" ><?php echo $row->first_name." ".$row->last_name; ?></a></h4>
-      <div id="fdiv<?=$row->u_id?>">
-        <?=reqbutton($row)?>
+    <h4><a href="userprofile.php?u=<?=$req_det->u_id?>" ><?php echo $req_det->first_name." ".$req_det->last_name; ?></a></h4>
+      <div id="fdiv<?=$req_det->u_id?>">
+        <?=reqbutton($req_det)?>
       </div>
   </div>
 </div>
 
+<?}?>
+  <div class="small-12 columns ">
+<h5>
+<br>
+
+<strong style="font-weight:500">Basic Information</strong></h5>
+</div>
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      Birth Date 
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp;<?=$req_det->date_of_birth?>
+    </h5>
+  </div>
+</div>
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      Gender  
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
 <?php
-}
+  $gen = $req_det->gender == 'M' ? 'Male' : 'Female';
 ?>
-<h4>Other requests:   </h4>
+      :&nbsp;&nbsp;<?=$gen?>
+    </h5>
+  </div>
+</div>
+
+
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      Email  
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp;<?=$req_det->email?>
+    </h5>
+  </div>
+</div>
 
 <?php
-$query = "SELECT u.u_id,u.first_name,u.last_name,a.a_id,a.a_link from `mpac`.`attachments` AS a LEFT JOIN `mpac`.`users` AS u ON a.a_owner = u.u_id WHERE a.a_wall = '".$_SESSION['id']."' AND a.a_wall != a.a_owner AND a.publish = 0 ORDER BY a.updated_at ";
-$res7 = mysql_query($query) or die(mysql_error());
-while( $row = mysql_fetch_object($res7) ){
+
+  if ( $req_det->school_name_o == 1 or ( $req_det->school_name_o == 2 and $pre_f == 1 ) or ( $req_det->school_name_o == 3 and $req_det->u_id == $_SESSION['id'] ) ){
+ 
+
 ?>
-  <div class="small-12 columns ">
-    <div class="row">
-      <div class="small-10 columns">
-      <h5> <?=$row->first_name?> Wants to post this picture on your Timeline.. </h5>
-      </div>
-    </div>
-    <div class="row">
-      <div class="small-10 columns">
-        <a style="float:left" class="th"><img style="max-height:250px;" src="images/<?=$row->a_link?>"></a> 
-      </div>
-    </div><br>
-    <div class="row">
-      <div class="small-10 columns">
-      <a href="approvephoto.php?q=<?=$row->a_id?>" style="height:40px;line-height:8px" class="button"  >Approve </a> &nbsp;| &nbsp; 
-        <a href="approvephoto.php?q=<?=$row->a_id?>&d=1" style="height:40px;line-height:8px" class="button"> Decline</a> 
-      </div>
-    </div>
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      School Name  
+    </h5>
   </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp; <?=$req_det->school_name?>
+    </h5>
+  </div>
+</div>
+
+<?php } 
+  if ( $req_det->college_name_o == 1 or ( $req_det->college_name_o == 2 and $pre_f == 1 ) or ( $req_det->college_name_o == 3 and $req_det->u_id == $_SESSION['id'] ) ){
+
+?>
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      College name  
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp;<?=$req_det->college_name?>
+    </h5>
+  </div>
+</div>
+
+<?php } 
+  if ( $req_det->works_at_o == 1 or ( $req_det->works_at_o == 2 and $pre_f == 1 ) or ( $req_det->works_at_o == 3 and $req_det->u_id == $_SESSION['id'] ) ){
+
+?>
+
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      Works at  
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp;<?=$req_det->works_at?>
+    </h5>
+  </div>
+</div>
+
+<?php } 
+  if ( $req_det->lives_at_o == 1 or ( $req_det->lives_at_o == 2 and $pre_f == 1 ) or ( $req_det->lives_at_o == 3 and $req_det->u_id == $_SESSION['id'] ) ){
+
+?>
+
+<div class="small-12 columns ">
+  <div class="small-2 columns">
+    <h5>
+      Lives at  
+    </h5>
+  </div>
+  <div class="small-10 columns">
+    <h5>
+      :&nbsp;&nbsp;<?=$req_det->lives_at?>
+    </h5>
+  </div>
+</div>
+
+
+
 <?php
-}
+  }
 include "footer.php";
 ?>
-
-<br>
-<br>
-<br>
-<br>

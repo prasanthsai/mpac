@@ -19,6 +19,7 @@
 
 
  <!-- body content ends -->
+  <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
   <script src="js/vendor/jquery.js"></script>
   <script src="js/foundation.min.js"></script>
   <script>

@@ -17,6 +17,7 @@
   <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/foundation.css">
+  <link rel="stylesheet" href="fontawesome/css/font-awesome.min.css">
 
   <!-- If you are using the gem version, you need this only -->
   <link rel="stylesheet" href="css/app.css">
@@ -144,7 +145,7 @@
 	<nav class="top-bar" data-topbar>
   		<ul class="title-area">
     		<li class="name">
-      		<h1><a href="#">BuddysHome</a></h1>
+ <h1><a href="#"><i class="fa fa-home" style="color:white;"></i> | BuddysHome</a></h1>
     		</li>
     		<li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
   		</ul>
@@ -153,11 +154,11 @@
     	<!-- Left Nav Section -->
     	<ul class="right">           
         	
-            <li><a href="./index.php">Home</a></li>
+<!--            <li><a href="./index.php">Home</a></li>
             <li><a href="courses.php">Courses</a></li>
             <li><a href="topstudents.php">Top Students</a></li>
             <li><a href="dashboard.php">Dash Board</a></li>
-            <li class="has-form"><a href="#" data-reveal-id="signInModal" class="button">Sign In</a></li>
+-->            <li class="has-form"><a href="#" data-reveal-id="signInModal" class="button">Sign In</a></li>
         </ul>        
  		</section>
 	</nav>
@@ -180,7 +181,9 @@
       <div class="small-6 columns ">
         <a href="#">
           <img src="./images/social1.jpg"/>
-                  </a>
+                </a>
+<br>
+<br>
         <p>Connect with friends all over the world !! <br>
 
                         <br> Online Social Networks are Inherently designed to make Social Connections with Friends,Colleagues, Family and even with the Strangers...</p>
@@ -244,35 +247,31 @@
             <hr>
             <div class="row text-center">
             	<div class="small-12 columns">
-        			<h2>How are we different?</h2>
-        			<h4 class="subheader">Learn about the Technology that powers us! 	</h4>
+        			<h2>Web Technologies used</h2>
+        		<!--	<h4 class="subheader">Learn about the Technology that powers us! 	</h4> -->
         		</div>
             </div>
             <div class="row text-center">            	
         		<div class="small-4 columns ">
         				<a href="#">
          				<img src="./img/customizable.svg">
-         				<h4>WebRTC</h4></a>
-         				<p>No Plugins Needed!
-                        <br> Take Lectures from home, choose the timing that suits you and create a classroom.
-                        Teach the students and award them a badge on successsful completion of the Course.</p>
+         				<h4>HTML , CSS</h4></a>
+         				<p>
+                        <br> HTML lets you to create Web Pages and it describes the structure of WebPages ; CSS is used for describing the presentation of WebPages, including colors,layouts,fonts,etc </p>
       			</div>
                 <div class="small-4 columns ">
         				<a href="#">
          				<img src="./img/semantic.svg">
-         				<h4>Angular JS</h4></a>
-         				<p>Extended HTML Vocabulary!
-                        <br>  AngularJS lets you extend HTML vocabulary for your application. 
-                        The resulting environment is extraordinarily expressive, 
-                        readable, and quick to develop.</p>
+         				<h4>JavaScript</h4></a>
+         				<p>
+                        <br>  JavaScript is a Client-Side Scripting Language used in conjunction with HTML to create interactive Web pages .. It is one of the most Simple,Versatile and Effective Scripting Languages used to extend the Functionality in WebSites</p>
       			</div>     
                 <div class="small-4 columns ">
         				<a href="#">
          				<img src="./img/training.svg">
-         				<h4>Foundation</h4></a>
-         				<p>Product of Zurb!
-                        <br> Foundation by Zurb is the most advanced responsive front-end framework 
-                        in the world.</p>
+         				<h4>PHP</h4></a>
+         				<p>
+                        <br> PHP is a Widely used,Open-Source Server-Side Scripting Languages used for making Web pages more Dynamic and Interactive..   </p>
       			</div>     
                 <hr>                  
             </div>

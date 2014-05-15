@@ -24,7 +24,7 @@ if( isset($_GET['q']) ){
             $fnam = $user->u_id.md5(time()).".".$extension;
             if ( move_uploaded_file($_FILES["file"]["tmp_name"],"images/".$fnam) )
               if( mysql_query("UPDATE `mpac`.`users` SET `display_pic` = '".$fnam."' WHERE `u_id` = '".$_SESSION['id']."' LIMIT 1") )
-                header("Location:welcome.php?q=1&n=".$_GET['n']);
+                header("Location:welcome.php?q=1");
               else
                 $error2 =  "Invalid file, Please try again!";
                 
@@ -41,12 +41,7 @@ if( isset($_GET['q']) ){
 <div class="row">
   <div class="small-8 large-centered columns">
     <h3> Hello <?=$user->first_name?> <?=$user->last_name?> </h3>
-    <?php if ( isset( $_GET['n'] ) ) if ( $_GET['n'] != 2 ) { ?>
-    <h5> You are in the Process of Registration... Please Fill the following details to Continue. </h5>
-    <?php } ?>
-    <?php if ( !isset( $_GET['n'] ) ) { ?>
-    <h5> You are in the Process of Registration... Please Fill the following details to Continue. </h5>
-    <?php } ?>
+
 <br>
 <br>
 <br>
@@ -108,12 +103,6 @@ if( isset( $_POST['submit'] ) ){
   }
 }
 
-if ( $user->gender != NULL and $user->display_pic != "default.jpg" ){
-    header("Location:home.php");
-}
-else if( $user->gender != NULL ){
-  header("Location:welcome.php?q=1");
-}
 
 
 ?>
